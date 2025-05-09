@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCRT</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      background: #ffffff;
+      user-select: none;
+    }
+
+    #frame-container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 768px) {
+      iframe {
+        height: 90vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="frame-container">
+    <iframe
+      id="embeddedPage"
+      src="https://jazzy-pony-ec6cf9.netlify.app/"
+      loading="lazy"
+      title="Embedded MCRT Page">
+    </iframe>
+    <noscript>
+      <p style="text-align: center; padding: 1rem;">
+        Your browser does not support JavaScript or iframes are disabled.
+        <a href="https://jazzy-pony-ec6cf9.netlify.app/" target="_blank">Click here</a> to view the content.
+      </p>
+    </noscript>
+  </div>
+
+  <script>
+    // Disable right-click context menu
+    document.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+    });
+
+    // Block common developer tools shortcuts
+    document.addEventListener("keydown", (e) => {
+      if (
+        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "J" || e.key === "j")) || // Ctrl+Shift+I/J
+        (e.ctrlKey && (e.key === "U" || e.key === "u")) || // Ctrl+U
+        (e.key === "F12") // F12
+      ) {
+        e.preventDefault();
+      }
+    });
+
+    // Simple DevTools detection (not foolproof)
+    setInterval(() => {
+      const devToolsOpen =
+        window.outerWidth - window.innerWidth > 160 ||
+        window.outerHeight - window.innerHeight > 160;
+
+      if (devToolsOpen) {
+        document.body.innerHTML = "<h2 style='text-align:center; padding-top: 20%; color: red;'>Inspecting is disabled!</h2>";
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
